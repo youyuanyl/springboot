@@ -1,0 +1,121 @@
+@CHARSET "UTF-8";
+body{}
+
+.main_div{
+    width: 1000px; margin: 0 auto; background-color: #efefef;min-height: 700px;
+}
+
+ul li {list-style-type: square;}
+a{text-decoration:none}
+input[type="button"]{cursor: pointer;}
+
+.login-table tr td{width: 100px;}
+.login-table tr td{width: 200px;}
+.login-table tr td input{width: 190px;}
+.checkImg{width: 50px;}
+
+#head {
+    width: 100%;
+    height: 92px;
+    /* background: url(../images/icon_header.png) no-repeat center right #8D0710; */
+}
+
+#banner {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+    /* background: #af0000;
+    color: #FFF; */
+}
+
+#left {
+    width: 200px;
+    position: absolute;
+    /* background: #f2f3f6;
+    top: 150px;
+    left: 0; */
+}
+#right {
+    margin-left: 200px;
+    border-left: 5px solid #eaebeb;
+    background: #ffffff;
+    min-height: 400px;
+    padding: 20px;
+}
+
+ul#menu, ul#menu ul {
+    list-style-type: none;
+    margin: 0;
+    font-size: 14px;
+    font-family: "宋体";
+    font-weight: bold;
+}
+
+ul#menu li {
+    margin-top: 1px;
+    margin-bottom: 6px;
+}
+
+ul#menu li a {
+    font-size: 14px;
+    color: #fff;
+    height: 26px;
+    line-height: 26px;
+    background: #af0000;
+    padding: 0 26px;
+    text-align: center;
+}
+
+ul#menu li ul li {
+    height: 24px;
+    line-height: 24px;
+}
+
+ul#menu li ul li a {
+    height: 28px;
+    color: #af0000;
+    background: none;
+    font-size: 14px;
+    font-family: "宋体";
+    background: url(../images/sec6.gif) center left no-repeat;
+    line-height: 28px;
+    font-weight: normal;
+    margin: 5px 0 2px;
+}
+
+#topic {
+    width: 14%;
+    height: 35px;
+    line-height: 35px;
+    float: left;
+}
+
+#welcom {
+    float: left;
+    font-size: 14px;
+    /* color: #fff; */
+    padding: 0 1.5%;
+}
+
+.pass_change {
+    font-size: 14px;
+    /* color: #FFF; */
+    float: right;
+    padding-right: 18px;
+}
+
+.list-table{
+	width: 100%; 
+	border-left: 1px solid; 
+	border-top: 1px solid;
+}
+
+.list-table th{
+	border-bottom: 1px solid; 
+	border-right: 1px solid;
+}
+
+.list-table td{
+	border-bottom: 1px solid; 
+	border-right: 1px solid;
+}

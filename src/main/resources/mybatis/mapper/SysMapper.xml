@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gft.app.dao.SysDAO">
+	<!-- 菜单 -->
+	<resultMap id="MenuResultMap" type="com.gft.app.domain.AqMenu">
+		<id column="id" property="id" jdbcType="VARCHAR" />
+		<result column="parentid" property="parentid" jdbcType="VARCHAR" />
+		<result column="menuname" property="menuname" jdbcType="VARCHAR" />
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="description" property="description" jdbcType="VARCHAR" />
+		<result column="ordernum" property="ordernum" jdbcType="INTEGER" />
+		<result column="scrq" property="scrq" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<select id="fineMenuListByUserId" parameterType="java.lang.String" resultMap="MenuResultMap">
+		<!-- SELECT
+		m.id,m.parentid,m.menuname,m.url,m.description,m.ordernum,m.scrq FROM
+		aq_menu m
+		LEFT JOIN aq_role_menu rm ON rm.menu_id=m.id
+		LEFT JOIN aq_role
+		r ON r.id=rm.role_id
+		LEFT JOIN aq_user_role ur ON ur.role_id=r.id
+		WHERE
+		1=1
+		AND ur.user_id=#{userId,jdbcType=VARCHAR}
+		ORDER BY m.ordernum -->
+		
+		SELECT * FROM (
+			SELECT m.id,m.parentid,m.menuname,m.url,m.description,m.ordernum,m.scrq FROM `aq_menu` m
+			LEFT JOIN `aq_role_menu` rm ON rm.`menu_id`=m.`id`
+			LEFT JOIN `aq_role` r ON r.`id`=rm.`role_id`
+			LEFT JOIN `aq_user_role` ur ON ur.`role_id`=r.`id`
+			WHERE 1=1 
+			AND ur.`user_id`=#{userId,jdbcType=VARCHAR}
+			UNION 
+			SELECT m.id,m.parentid,m.menuname,m.url,m.description,m.ordernum,m.scrq FROM `aq_menu` m
+			LEFT JOIN `aq_menu` m2 ON m2.id=m.`parentid`
+			LEFT JOIN `aq_role_menu` rm ON rm.`menu_id`=m2.`id`
+			LEFT JOIN `aq_role` r ON r.`id`=rm.`role_id`
+			LEFT JOIN `aq_user_role` ur ON ur.`role_id`=r.`id`
+			WHERE 1=1 
+			AND ur.`user_id`=#{userId,jdbcType=VARCHAR}
+		) a
+		ORDER BY a.`ordernum`
+		
+	</select>
+
+	<select id="getMenuById" parameterType="java.lang.String" resultMap="MenuResultMap">
+		SELECT
+		m.id,m.parentid,m.menuname,m.url,m.description,m.ordernum,m.scrq FROM
+		aq_menu m
+		WHERE 1=1
+		AND m.id=#{menuId,jdbcType=VARCHAR}
+		ORDER BY m.ordernum
+	</select>
+	
+	<select id="findAllMenu" parameterType="com.gft.app.domain.AqMenu" resultMap="MenuResultMap">
+		SELECT
+		m.id,m.parentid,m.menuname,m.url,m.description,m.ordernum,m.scrq FROM
+		aq_menu m
+		<where>
+			1=1
+			<if test="id != null">
+				AND m.id=#{id,jdbcType=VARCHAR}
+			</if>
+		</where>
+		ORDER BY m.ordernum
+	</select>
+	
+	<insert id="insertMenu" parameterType="com.gft.app.domain.AqMenu">
+		insert into aq_menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="parentid != null">
+				parentid,
+			</if>
+			<if test="menuname != null">
+				menuname,
+			</if>
+			<if test="url != null">
+				url,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="ordernum != null">
+				ordernum,
+			</if>
+			<if test="scrq != null">
+				scrq,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="parentid != null">
+				#{parentid,jdbcType=VARCHAR},
+			</if>
+			<if test="menuname != null">
+				#{menuname,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				#{url,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="ordernum != null">
+				#{ordernum,jdbcType=INTEGER},
+			</if>
+			<if test="scrq != null">
+				#{scrq,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+
+
+</mapper>

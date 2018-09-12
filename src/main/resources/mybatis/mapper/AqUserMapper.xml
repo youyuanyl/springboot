@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gft.app.dao.UserDAO" >
+  <resultMap id="BaseResultMap" type="com.gft.app.domain.AqUser" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="scrq" property="scrq" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, username, password, name, scrq
+  </sql>
+  <sql id="where">
+  	<where>
+  		1=1
+  		<if test="id != null">
+  			AND id = #{id,jdbcType=VARCHAR}
+  		</if>
+  		<if test="username != null">
+  			AND username = #{username,jdbcType=VARCHAR}
+  		</if>
+  		<if test="password != null">
+  			AND password = #{password,jdbcType=VARCHAR}
+  		</if>
+  	</where>
+  </sql>
+  <select id="select" resultMap="BaseResultMap" parameterType="com.gft.app.domain.AqUser" >
+    select 
+    <include refid="Base_Column_List" />
+    from aq_user
+    <include refid="where" />
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from aq_user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getUser" resultMap="BaseResultMap" parameterType="com.gft.app.domain.AqUser">
+  	
+  </select>
+  
+  
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from aq_user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gft.app.domain.AqUser" >
+    insert into aq_user (id, username, password, 
+      name, scrq)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{scrq,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gft.app.domain.AqUser" >
+    insert into aq_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="scrq != null" >
+        scrq,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="scrq != null" >
+        #{scrq,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gft.app.domain.AqUser" >
+    update aq_user
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="scrq != null" >
+        scrq = #{scrq,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gft.app.domain.AqUser" >
+    update aq_user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      scrq = #{scrq,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

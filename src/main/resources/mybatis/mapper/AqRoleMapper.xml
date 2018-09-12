@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gft.app.dao.AqRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.gft.app.domain.AqRole" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="rolename" property="rolename" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="scrq" property="scrq" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, rolename, description, scrq
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from aq_role
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from aq_role
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.gft.app.domain.AqRole" >
+    insert into aq_role (id, rolename, description, 
+      scrq)
+    values (#{id,jdbcType=VARCHAR}, #{rolename,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{scrq,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gft.app.domain.AqRole" >
+    insert into aq_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="rolename != null" >
+        rolename,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="scrq != null" >
+        scrq,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="rolename != null" >
+        #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="scrq != null" >
+        #{scrq,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gft.app.domain.AqRole" >
+    update aq_role
+    <set >
+      <if test="rolename != null" >
+        rolename = #{rolename,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="scrq != null" >
+        scrq = #{scrq,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gft.app.domain.AqRole" >
+    update aq_role
+    set rolename = #{rolename,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      scrq = #{scrq,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
